@@ -63,7 +63,6 @@ RUN set -eux; \
   # other
   libtinfo5 \
   libpq-dev \
-  libxslt \
   libjpeg-dev \
   libpng-dev \
   libfreetype6-dev \
@@ -73,8 +72,15 @@ RUN set -eux; \
   zlib1g-dev \
   libpng-dev \
   procps \
+  libgmp-dev\
+  libxml2-dev \
+  libxslt-dev \
+  python-dev\
   libmhash-dev \
   librabbitmq-dev \
+  geoip-bin \
+  geoip-database \
+  libgeoip-dev\
   ntpdate ;
 
 ####################################################################################
@@ -139,7 +145,7 @@ RUN docker-php-ext-configure gd \
   docker-php-ext-install xmlwriter ;\
   docker-php-ext-install sodium;\
   docker-php-ext-install opcache;\
-  docker-php-ext-install xsl ;\
+  docker-php-ext-install xsl;\
   docker-php-ext-install zlib;\
   # \
   # ⬇ XDebug
@@ -153,7 +159,7 @@ RUN docker-php-ext-configure gd \
   echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini ; \
   \
   # ⬇ Redis
-  pecl install /home/resource/$REDIS ; \ 
+  pecl install /home/resource/$REDIS ; \
   echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini ; \
   \
   # ⬇ Amqp
@@ -171,6 +177,14 @@ RUN docker-php-ext-configure gd \
   # ⬇ msgpack
   pecl install msgpack; \
   echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini ; \
+  \
+  # ⬇ igbinary
+  pecl install igbinary; \
+  echo "extension=igbinary.so" > /usr/local/etc/php/conf.d/igbinary.ini ; \
+  \
+  # ⬇ geoip
+  pecl install geoip; \
+  echo "extension=geoip.so" > /usr/local/etc/php/conf.d/geoip.ini ; \
   \
   # \
   # # ⬇ Open Swoole
