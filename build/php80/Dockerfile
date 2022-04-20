@@ -137,6 +137,8 @@ RUN docker-php-ext-configure gd \
   docker-php-ext-install xml ;\
   docker-php-ext-install xmlreader ;\
   docker-php-ext-install xmlwriter ;\
+  docker-php-ext-install sodium;\
+  docker-php-ext-install opcache;\
   docker-php-ext-install xsl ;\
   docker-php-ext-install zlib;\
   # \
@@ -157,6 +159,18 @@ RUN docker-php-ext-configure gd \
   # ⬇ Amqp
   pecl install amqp; \
   echo "extension=amqp.so" > /usr/local/etc/php/conf.d/amqp.ini ; \
+  \
+  # ⬇ crypto
+  pecl install channel://pecl.php.net/crypto-0.3.2; \
+  echo "extension=crypto.so" > /usr/local/etc/php/conf.d/crypto.ini ; \
+  \
+  # ⬇ mcrypt
+  pecl install mcrypt; \
+  echo "extension=mcrypt.so" > /usr/local/etc/php/conf.d/mcrypt.ini ; \
+  \
+  # ⬇ msgpack
+  pecl install msgpack; \
+  echo "extension=msgpack.so" > /usr/local/etc/php/conf.d/msgpack.ini ; \
   \
   # \
   # # ⬇ Open Swoole
