@@ -11,6 +11,7 @@ ARG SWOOLE=swoole-4.8.7.tgz
 ARG REDIS=redis-5.3.7.tgz
 ARG MCRYPT=mcrypt-1.0.4.tgz
 ARG XDEBUG=xdebug-3.1.3.tgz
+ARG AMQP=amqp-1.9.4.tgz
 
 ENV TIME_ZONE=${TIME_ZONE} LC_ALL=C.UTF-8
 
@@ -62,6 +63,7 @@ RUN set -eux; \
   # other
   libtinfo5 \
   libpq-dev \
+  libxslt \
   libjpeg-dev \
   libpng-dev \
   libfreetype6-dev \
@@ -80,9 +82,63 @@ RUN set -eux; \
 ####################################################################################
 
 RUN docker-php-ext-configure gd \
-  --with-freetype-dir=/usr/include/ \
-  --with-jpeg-dir=/usr/include/ ; \
-  docker-php-ext-install -j$(nproc) gd intl pdo_mysql ldap mysqli bz2 zip sockets pgsql pdo_pgsql bcmath soap pcntl; \
+  --with-freetype \
+  --with-jpeg; \
+  docker-php-ext-install gd;\
+  docker-php-ext-install intl ;\
+  docker-php-ext-install pdo_mysql ;\
+  docker-php-ext-install ldap ;\
+  docker-php-ext-install mysqli ;\
+  docker-php-ext-install bz2 ;\
+  docker-php-ext-install zip ;\
+  docker-php-ext-install sockets ;\
+  docker-php-ext-install pgsql ;\
+  docker-php-ext-install pdo_pgsql ;\
+  docker-php-ext-install bcmath ;\
+  docker-php-ext-install soap ;\
+  docker-php-ext-install pcntl ;\
+  docker-php-ext-install calendar ;\
+  docker-php-ext-install com_dotnet ;\
+  docker-php-ext-install ctype ;\
+  docker-php-ext-install curl ;\
+  docker-php-ext-install date ;\
+  docker-php-ext-install dom ;\
+  docker-php-ext-install exif ;\
+  docker-php-ext-install fileinfo ;\
+  docker-php-ext-install filter ;\
+  docker-php-ext-install gmp ;\
+  docker-php-ext-install ftp ;\
+  docker-php-ext-install gettext ;\
+  docker-php-ext-install hash ;\
+  docker-php-ext-install imap ;\
+  docker-php-ext-install iconv ;\
+  docker-php-ext-install json ;\
+  docker-php-ext-install libxml ;\
+  docker-php-ext-install mbstring ;\
+  docker-php-ext-install mysqlnd ;\
+  docker-php-ext-install openssl ;\
+  docker-php-ext-install pcre ;\
+  docker-php-ext-install pdo ;\
+  docker-php-ext-install pdo_sqlite ;\
+  docker-php-ext-install Phar ;\
+  docker-php-ext-install posix ;\
+  docker-php-ext-install readline ;\
+  docker-php-ext-install Reflection ;\
+  docker-php-ext-install session ;\
+  docker-php-ext-install shmop ;\
+  docker-php-ext-install SimpleXML ;\
+  docker-php-ext-install SPL ;\
+  docker-php-ext-install sqlite3 ;\
+  docker-php-ext-install standard ;\
+  docker-php-ext-install sysvmsg ;\
+  docker-php-ext-install sysvsem ;\
+  docker-php-ext-install sysvshm ;\
+  docker-php-ext-install tokenizer ;\
+  docker-php-ext-install xml ;\
+  docker-php-ext-install xmlreader ;\
+  docker-php-ext-install xmlwriter ;\
+  docker-php-ext-install xsl ;\
+  docker-php-ext-install zlib;\
   # \
   # ⬇ XDebug
   # pecl install /home/resource/$XDEBUG ; \
@@ -97,6 +153,11 @@ RUN docker-php-ext-configure gd \
   # ⬇ Redis
   pecl install /home/resource/$REDIS ; \ 
   echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini ; \
+  \
+  # ⬇ Amqp
+  pecl install amqp; \
+  echo "extension=amqp.so" > /usr/local/etc/php/conf.d/amqp.ini ; \
+  \
   # \
   # # ⬇ Open Swoole
   # pecl install /home/resource/$OPEN_SWOOLE ; \

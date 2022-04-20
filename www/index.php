@@ -58,7 +58,7 @@
 	</div>
 
 	<footer>
-		<a href="https://github.com/telanflow/dnmp" target="_blank">Get Documentation</a>
+		<a href="https://github.com/xiachaoqing/dnmp" target="_blank">Get Documentation</a>
 
 		<p style="color:#ccc;font-size:12px;margin-top:100px;">
 			&copy; <?php echo date("Y") ?>&nbsp;telan.me
