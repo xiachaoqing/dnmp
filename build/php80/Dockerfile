@@ -81,6 +81,7 @@ RUN set -eux; \
   geoip-bin \
   geoip-database \
   libgeoip-dev\
+  python-dev\
   ntpdate ;
 
 ####################################################################################
