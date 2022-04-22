@@ -184,7 +184,7 @@ RUN docker-php-ext-configure gd \
   echo "extension=igbinary.so" > /usr/local/etc/php/conf.d/igbinary.ini ; \
   \
   # ⬇ geoip
-  pecl install geoip; \
+  COPY /home/resource/geoip.so  /usr/local/lib/php/extensions/no-debug-non-zts-20200930/ \
   echo "extension=geoip.so" > /usr/local/etc/php/conf.d/geoip.ini ; \
   \
   # \
