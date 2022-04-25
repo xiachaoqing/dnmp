@@ -3,7 +3,7 @@ FROM php:8.0-fpm-buster
 COPY resource /home/resource
 
 ARG CHANGE_SOURCE=true
-ARG TIME_ZONE=UTC
+ARG TIME_ZONE=Asia/Shanghai
 
 ARG MongoDB=mongodb-1.12.1.tgz
 ARG OPEN_SWOOLE=openswoole-4.10.0.tgz
